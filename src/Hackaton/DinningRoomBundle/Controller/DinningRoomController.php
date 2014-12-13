@@ -9,27 +9,29 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DinningRoomController extends Controller
 {
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function indexAction()
     {
         $dinners = $this->getDoctrine()->getRepository('HackatonDinningRoomBundle:DinningRoom')->findAll();
-        echo "<pre>";
-//        \Doctrine\Common\Util\Debug::dump($dinners);die;
         $locations = array();
         foreach ($dinners as $key => $value) {
             $locations[] = array($value->address, $value->latitude, $value->longitude);
         }
-//                     var_dump($locations);die;
 
         return $this->render('HackatonDinningRoomBundle:DinningRoom:index.html.twig', array('locs' => $locations, 'dinners' => $dinners));
     }
 
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function createAction(Request $request)
     {
         $dr = new DinningRoom();
-
         $form = $this->createForm(new DinningRoomType(), $dr);
         $form->handleRequest($request);
-
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($dr);
@@ -39,13 +41,16 @@ class DinningRoomController extends Controller
         return $this->render('HackatonDinningRoomBundle:DinningRoom:create.html.twig', array('form' => $form->createView()));
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function updateAction(Request $request, $id)
     {
         $dr = $this->getDoctrine()->getRepository('HackatonDinningRoomBundle:DinningRoom')->find($id);
-
         $form = $this->createForm(new DinningRoomType(), $dr);
         $form->handleRequest($request);
-
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($dr);
@@ -55,6 +60,10 @@ class DinningRoomController extends Controller
         return $this->render('HackatonDinningRoomBundle:DinningRoom:create.html.twig', array('form' => $form->createView()));
     }
 
+    /**
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function showAction($id)
     {
         $dinner = $this->getDoctrine()->getRepository('HackatonDinningRoomBundle:DinningRoom')->find($id);
