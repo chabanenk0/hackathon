@@ -1,0 +1,3 @@
+hackaton_cleaner_job_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: HackatonCleanerJobBundle:Default:index }

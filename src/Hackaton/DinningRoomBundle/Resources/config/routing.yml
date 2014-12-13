@@ -1,0 +1,3 @@
+hackaton_dinning_room_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: HackatonDinningRoomBundle:Default:index }

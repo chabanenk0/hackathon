@@ -1,0 +1,4 @@
+services:
+#    hackaton_cleaner_job.example:
+#        class: Hackaton\CleanerJobBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
