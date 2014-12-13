@@ -1,5 +1,5 @@
 _welcome:
-    path:     /
+    path:     /index
     defaults: { _controller: AcmeDemoBundle:Welcome:index }
 
 _demo_secured:

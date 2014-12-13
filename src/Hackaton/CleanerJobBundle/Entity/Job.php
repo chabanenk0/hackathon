@@ -44,7 +44,7 @@ class Job
     protected $creator;
 
     /**
-     * @ORM\OneToOne(targetEntity="Hackaton\CleanerJobBundle\Entity\Candidate", cascade="all")
+     * @ORM\OneToMany(targetEntity="Hackaton\CleanerJobBundle\Entity\Candidate", mappedBy="job")
      */
     protected $candidates;
 
