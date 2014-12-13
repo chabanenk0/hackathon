@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Entity
  */
-class DinningRoom extends Enterprise {
-
+class DinningRoom extends Enterprise
+{
 
 }

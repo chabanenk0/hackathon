@@ -1,3 +1,15 @@
-hackaton_dinning_room_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: HackatonDinningRoomBundle:Job:index }
+hackaton_dinners:
+    path:     /dinners
+    defaults: { _controller: HackatonDinningRoomBundle:DinningRoom:index }
+
+hackaton_dinning_room_show:
+    path:     /dinning_room/show/{id}
+    defaults: { _controller: HackatonDinningRoomBundle:DinningRoom:show, id: 0 }
+
+hackaton_dinning_room_create:
+    path:     /dinning_room/create
+    defaults: { _controller: HackatonDinningRoomBundle:DinningRoom:create }
+
+hackaton_dinning_room_update:
+    path:     /dinning_room/update/{id}
+    defaults: { _controller: HackatonDinningRoomBundle:DinningRoom:update, id: 0 }
