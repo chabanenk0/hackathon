@@ -3,6 +3,7 @@
 namespace Hackaton\CleanerJobBundle\Controller;
 
 use Hackaton\CleanerJobBundle\Entity\Job;
+use Hackaton\CleanerJobBundle\Form\Type\JobType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -26,12 +27,7 @@ class JobController extends Controller
 
         $job = new Job();
 
-        $form = $this->createFormBuilder($job)
-            ->add('name', 'text')
-            ->add('description', 'text')
-            ->add('save', 'submit', array('label' => 'Create Task'))
-            ->getForm();
-
+        $form = $this->createForm(new JobType(), $job, array('label' => 'Create a job'));
 
         $form->handleRequest($request);
 
@@ -75,11 +71,7 @@ class JobController extends Controller
             throw new AccessDeniedException();
         }
 
-        $form = $this->createFormBuilder($job)
-            ->add('name', 'text')
-            ->add('description', 'text')
-            ->add('save', 'submit', array('label' => 'Save changes'))
-            ->getForm();
+        $form = $this->createForm(new JobType(), $job, array('label' => 'Save changes'));
 
         $form->handleRequest($request);
 
