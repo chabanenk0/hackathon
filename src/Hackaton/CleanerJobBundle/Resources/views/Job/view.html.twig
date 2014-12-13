@@ -1,6 +1,12 @@
-<h2>Перегляд вакансії</h2>
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h2>Перегляд вакансії</h2>
 <p>Ім'я: {{ job.name }}</p>
 <p>Опис: {{ job.description }}</p>
 {% if edit_rights %}
 <a href="{{ path('hackaton_cleaner_job_edit', {'id': job.id}) }}">Редагувати</a>
 {% endif %}
+
+{% endblock body %}

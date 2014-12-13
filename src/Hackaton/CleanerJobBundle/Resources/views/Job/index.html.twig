@@ -1,3 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
 <h2>На даний момент доступні такі вакансії</h2>
 
 <ul>
@@ -7,3 +11,4 @@
 </ul>
 
 <a href="{{ path('hackaton_cleaner_job_new') }}">Додати нову вакансію</a>
+{% endblock body %}
