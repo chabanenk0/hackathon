@@ -31,9 +31,6 @@ $(document).ready(function () {
             var geocoder = new google.maps.Geocoder();
             var latlng = new google.maps.LatLng(latitude, longitude);
             geocoder.geocode({'latLng': latlng}, function (results, status) {
-                console.log(results[1].address_components);
-                console.log(latitude);
-                console.log(longitude);
                 if (status == google.maps.GeocoderStatus.OK) {
                     document.getElementById('dinning_room_latitude').value = latitude;
                     document.getElementById('dinning_room_longitude').value = longitude;
