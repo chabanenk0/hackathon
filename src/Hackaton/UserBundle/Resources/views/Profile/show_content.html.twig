@@ -1,0 +1,91 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-9">
+            {% if user.profile is null %}
+                {% for flashMessage in app.session.flashbag.get('user_registered') %}
+                    <div class="alert alert-success"><strong>
+                            {{ flashMessage }}
+                        </strong></div>
+                {% endfor %}
+            {% else %}
+            {% block content %}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="well well-sm">
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-4">
+                                        <img src="{{ asset('uploads/photos/' ~ user.profile.path) }}"
+                                             alt="{{ user.username }}" width="250" height="550"
+                                             class="img-responsive img-rounded">
+                                    </div>
+                                    <div class="col-sm-6 col-md-8">
+                                        <h4>{{ 'profile.show.username'|trans }}: {{ user.username }}</h4>
+                                        <small><cite title="San Francisco, USA">San Francisco, USA <i
+                                                        class="glyphicon glyphicon-map-marker"></i></cite></small>
+
+                                        <p>
+                                            <i class="glyphicon glyphicon-user"></i>Фио:{{ user.profile.fio }}<br/>
+                                            <i class="glyphicon glyphicon-envelope"></i>Почта:{{ user.email }}<br/>
+                                            <i class="glyphicon glyphicon-gift"></i>Дата
+                                            рождения:{{ user.profile.birthDate | date('Y-m-d') }}<br/>
+                                        </p>
+
+                                        <p><i class="glyphicon glyphicon-envelope"></i>Контактная
+                                            почта: {{ user.profile.contactMail }}</p>
+
+                                        <p><i class="glyphicon glyphicon-glass"></i>Стать: {{ user.profile.gender }}</p>
+
+                                        <p><i class="glyphicon glyphicon-road"></i>Активние
+                                            поездки: {{ user.profile.activeTrips }}</p>
+
+                                        <p>
+                                            <i class="glyphicon glyphicon-phone-alt"></i>Телефон: {{ user.profile.telephone }}
+                                        </p>
+
+                                        {% if user.roles[0] == 'ROLE_DRIVER' %}
+                                            <p><i class="glyphicon glyphicon-time"></i>Год за
+                                                рулем: {{ user.profile.yearOnRoad }}</p>
+
+                                            <p><i class=" glyphicon glyphicon-star"></i>Категория
+                                                прав:
+                                                {% for category in user.profile.categories %}
+                                                    {{ category.categoryname }}
+                                                {% endfor %}
+                                            </p>
+
+                                            <p>
+                                                <i class="glyphicon glyphicon-file"></i>Лицензия: {{ user.profile.driverLicence | date('Y-m-d') }}
+                                            </p>
+
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {% endblock %}
+        </div>
+
+        <div class="col-md-3" id="leftCol">
+
+            <div class="well">
+                <ul class="nav nav-stacked" id="sidebar">
+                    {#<li><a href="{{ path("fos_user_profile_edit") }}">Редактировать профиль</a></li>#}
+                    {% if user.roles[0] == 'ROLE_DRIVER' %}
+                                профиль</a></li>
+                    {% endif %}
+                            коментарии</a></li>
+                            уведомления{{ user.profile.activemessages|length }}</a></li>
+                </ul>
+            </div>
+
+        </div>
+        {% endif %}
+    </div>
+</div>
