@@ -2,6 +2,13 @@
 
 {% block content %}
 
+    {% for flashMessage in app.session.flashbag.get('user_registered') %}
+        <div class="alert alert-success"><strong>
+                {{ flashMessage }}
+                <a href="{{ path('user_manage_profile') }}">Керування профілем</a>
+            </strong></div>
+    {% endfor %}
+
     <!-- Page Content -->
     <div class="container">
 

@@ -42,8 +42,8 @@ class RegistrationSuccessListener implements EventSubscriberInterface
      */
     public function onRegistrationSuccess(FormEvent $event)
     {
-        $this->session->getFlashBag()->add('user_registered', 'Спасибо за регистрацию но еще не все, прежде чем начать деятельность на сайте, нужно заполнить информацию профиля!');
-        $url = $this->router->generate('_welcome');
+        $this->session->getFlashBag()->add('user_registered', 'Дякуємо за реєстрацію, але перш ніж почати діяльність на сайті заповніть інформацію профілю!');
+        $url = $this->router->generate('welcome_page');
         $event->setResponse(new RedirectResponse($url));
     }
 }

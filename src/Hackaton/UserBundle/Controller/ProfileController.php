@@ -5,7 +5,6 @@ namespace Hackaton\UserBundle\Controller;
 use Hackaton\UserBundle\Entity\Profile;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Hackaton\UserBundle\Form\Type\ProfileType;
 
 class ProfileController extends Controller
@@ -39,9 +38,11 @@ class ProfileController extends Controller
      */
     public function showAction($id)
     {
-        $profile = $this->getDoctrine()->getRepository('HackatonUserBundle:Profile')->find($id);
-        if (!$profile instanceof Profile) {
-            throw new NotFoundHttpException('Profile with this identifier not found!');
+        $profile = $this->getDoctrine()->getRepository('HackatonUserBundle:User')->find($id)->getProfile();
+        if (null == $profile) {
+            $this->get('session')->getFlashBag()->add('fill_profile', 'Спочатку заповніть дані профілю!');
+
+            return $this->redirect($this->generateUrl('user_manage_profile'));
         }
 
         return $this->render('HackatonUserBundle:Profile:showProfile.html.twig', array('profile' => $profile));
