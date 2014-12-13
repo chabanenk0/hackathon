@@ -1,0 +1,6 @@
+<h2>Hello!</h2>
+<p>Job name: {{ job.name }}</p>
+<p>Job description: {{ job.description }}</p>
+{% if edit_rights %}
+<a href="{{ path('hackaton_cleaner_job_edit', {'id': job.id}) }}">Edit</a>
+{% endif %}
