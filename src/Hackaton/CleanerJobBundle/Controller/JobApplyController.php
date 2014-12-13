@@ -5,6 +5,7 @@ namespace Hackaton\CleanerJobBundle\Controller;
 use Hackaton\CleanerJobBundle\Entity\Candidate;
 use Hackaton\CleanerJobBundle\Entity\Job;
 use Hackaton\CleanerJobBundle\Form\Type\CandidateType;
+use Hackaton\CleanerJobBundle\Form\Type\JobApproveType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -38,6 +39,7 @@ class JobApplyController extends Controller
 
         return $this->render('HackatonCleanerJobBundle:JobApply:new.html.twig', array(
             'form' => $form->createView(),
+            'job' => $job,
         ));
     }
 
@@ -51,24 +53,25 @@ class JobApplyController extends Controller
                 'HackatonCleanerJobBundle:JobApply:view.html.twig',
                 array(
                     'candidates' => $candidates,
-                    'edit_rights' => $this->isGrantedToApprove($job)
+                    'edit_rights' => $this->isGrantedToApprove($job),
+                    'jobId' => $jobId,
                 )
             );
         } else {
             throw new AccessDeniedException();
-        }
+      }
 
     }
 
-    public function editAction(Request $request, $id)
+    public function approveAction(Request $request, $jobId)
     {
         $em = $this->getDoctrine()->getManager();
-        $job = $em->find('Hackaton\CleanerJobBundle\Entity\Job', $id);
-        if (!$this->isGrantedToEdit($job)) {
+        $job = $em->find('Hackaton\CleanerJobBundle\Entity\Job', $jobId);
+        if (!$this->isGrantedToApprove($job)) {
             throw new AccessDeniedException();
         }
 
-        $form = $this->createForm(new JobType(), $job, array('label' => 'Save changes'));
+        $form = $this->createForm(new JobApproveType(), $job, array('label' => 'Save best candidate'));
 
         $form->handleRequest($request);
 
@@ -79,7 +82,7 @@ class JobApplyController extends Controller
             return $this->redirect($this->generateUrl('hackaton_cleaner_job_homepage'));
         }
 
-        return $this->render('HackatonCleanerJobBundle:Job:new.html.twig', array(
+        return $this->render('HackatonCleanerJobBundle:JobApply:choose.html.twig', array(
             'form' => $form->createView(),
         ));
     }

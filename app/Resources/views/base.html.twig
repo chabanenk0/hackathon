@@ -41,14 +41,24 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="{{ path('hackaton_dinners') }}">Столовки</a>
+                        <a href="{{ path('hackaton_dinners') }}">Їдальні</a>
                     </li>
                     <li>
-                        <a href="#">Вакансии</a>
+                        <a href="{{ path('hackaton_cleaner_job_homepage') }}">Вакансії</a>
                     </li>
+                    {% if app.user %}
+                        <li>
+                            <a href="{{ path('user_show_profile', {'id':app.user.id}) }}">Мій профіль</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('fos_user_security_logout') }}">Вийти</a>
+                        </li>
+
+                    {% else %}
                     <li>
-                        <a href="{{ path('fos_user_security_login') }}">Вход</a>
+                        <a href="{{ path('fos_user_security_login') }}">Вхід</a>
                     </li>
+                    {% endif %}
                 </ul>
             </div>
         {% endblock %}

@@ -1,4 +1,10 @@
-<div class="container">
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+
+    <div class="container">
     <div class="row">
 
         <div class="col-md-9">
@@ -30,6 +36,10 @@
 
                                         <p><i class="glyphicon glyphicon-glass"></i>Стать: {{ profile.gender }}</p>
 
+                                        {% if app.user.id is same as (profile.id) %}
+                                        <p><a href="{{ path('user_manage_profile') }}" class="button">Редагувати</a></p>
+                                        {% endif %}
+
                                     </div>
                                 </div>
                             </div>
@@ -41,3 +51,4 @@
         </div>
     </div>
 </div>
+{% endblock %}

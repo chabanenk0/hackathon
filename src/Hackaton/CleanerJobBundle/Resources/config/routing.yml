@@ -20,5 +20,5 @@ hackaton_cleaner_job_apply_view:
     path:     /applyjobs/{jobId}/view
     defaults: { _controller: HackatonCleanerJobBundle:JobApply:view }
 hackaton_cleaner_job_apply_approve:
-    path:     /applyjobs/{id}/approve
-    defaults: { _controller: HackatonCleanerJobBundle:Job:applicationApprove }
+    path:     /applyjobs/{jobId}/approve
+    defaults: { _controller: HackatonCleanerJobBundle:JobApply:approve }

@@ -8,4 +8,4 @@
 /vendor/
 /composer.phar
 .idea/
-/app/config/parameters.yml
+app/config/parameters.yml

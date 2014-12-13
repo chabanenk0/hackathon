@@ -34,10 +34,11 @@
     <div id="dinners">
         {% for dinner in dinners %}
             <div id="dinner">
-                {{ dinner.name }}
+                <a href="{{ path('hackaton_dinning_room_show', {'id': dinner.id}) }}">{{ dinner.name }}</a>
                 {{ dinner.description }}
             </div>
         {% endfor %}
+        <a href="{{ path('hackaton_dinning_room_create') }}">Додати нову їдальню</a>
     </div>
 
 {% endblock %}

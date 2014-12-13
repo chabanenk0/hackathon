@@ -6,7 +6,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 
-class CandidateType  extends AbstractType{
+class JobApproveType  extends AbstractType{
 
     /**
      * {@inheritDoc}
@@ -16,7 +16,7 @@ class CandidateType  extends AbstractType{
         if (!array_key_exists('label', $options)) {
             $options['label'] = 'Save';
         }
-        $builder->add('message', 'text', ['label' => 'Про себе'])
+        $builder->add('chosenBestCandidate', 'text', ['label' => 'Виберіть кандидата'])
             ->add('save', 'submit', ['label' => $options['label']]);
     }
 
@@ -26,7 +26,7 @@ class CandidateType  extends AbstractType{
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Hackaton\CleanerJobBundle\Entity\Candidate',
+            'data_class' => 'Hackaton\CleanerJobBundle\Entity\Job',
             'cascade_validation' => true,
         ]);
     }
@@ -36,7 +36,7 @@ class CandidateType  extends AbstractType{
      */
     public function getName()
     {
-        return 'candidate';
+        return 'job_approve';
     }
 
 }

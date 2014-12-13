@@ -37,7 +37,7 @@ class JobType  extends AbstractType{
      */
     public function getName()
     {
-        return 'profile';
+        return 'job';
     }
 
 }
