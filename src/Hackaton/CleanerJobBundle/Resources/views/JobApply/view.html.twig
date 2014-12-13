@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h2>На Вашу вакансію відгукнулись такі кандидати:</h2>
+
+<ul>
+    {% for candidate in candidates %}
+    <li>Імя:<a href="{{ path('user_show_profile', {'id':candidate.candidate.id}) }}">{{ candidate.candidate.profile.fio }}</a>Message:<a href="{{ path('hackaton_cleaner_job_view', {'id': candidate.id}) }}"> {{ candidate.message }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock bodyj %}
