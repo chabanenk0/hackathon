@@ -106,6 +106,4 @@ class Candidate
     {
         $this->message = $message;
     }
-
-
 }

@@ -1,9 +1,10 @@
 {% extends 'HackatonDinningRoomBundle::layout.html.twig' %}
 {% block content %}
-<div id="googleMap" style="width:500px;height:380px;"></div>
+    <script type="text/javascript" src="{{ asset('bundles/hackatondinningroom/js/map.js') }}"></script>
+    <div id="googleMap" style="width:500px;height:380px;"></div>
 
-<form method="post" {{ form_enctype(form) }} novalidate="novalidate">
-    {{ form_widget(form) }}
-    <input type="submit" value="Submit">
-</form>
+    <form method="post" {{ form_enctype(form) }} novalidate="novalidate">
+        {{ form_widget(form) }}
+        <input type="submit" value="Submit">
+    </form>
 {% endblock %}

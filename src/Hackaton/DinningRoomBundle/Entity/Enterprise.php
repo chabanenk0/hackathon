@@ -67,7 +67,7 @@ class Enterprise
     /**
      * @var string
      *
-     * @ORM\Column(name="photo", type="string", length=50, nullable=true)
+     * @ORM\Column(name="photo", type="string", length=255, nullable=true)
      */
     protected $photo;
 
@@ -76,7 +76,7 @@ class Enterprise
      *
      * @ORM\Column(name="latitude", type="float")
      */
-    public  $latitude;
+    public $latitude;
 
     /**
      * @var double

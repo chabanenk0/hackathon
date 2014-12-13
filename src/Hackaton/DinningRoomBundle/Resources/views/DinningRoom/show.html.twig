@@ -1,5 +1,7 @@
-<script type="text/javascript" src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+{% extends 'HackatonDinningRoomBundle::layout.html.twig' %}
+
+{% block content %}
+
 <div id="googleMap" style="width:500px;height:380px;"></div>
 <script type="text/javascript">
     var l1 = '{{ dinner.latitude }}';
@@ -9,7 +11,7 @@
         var mapOptions = {
             zoom: 4,
             center: myLatlng
-        }
+        };
         var map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
 
         var marker = new google.maps.Marker({
@@ -24,3 +26,5 @@
 
 {{ dinner.name }}
 {{ dinner.description }}
+
+{% endblock %}
