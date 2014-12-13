@@ -1,3 +1,11 @@
+hackaton_cleaner_job:
+    resource: "@HackatonCleanerJobBundle/Resources/config/routing.yml"
+    prefix:   /
+
+hackaton_dinning_room:
+    resource: "@HackatonDinningRoomBundle/Resources/config/routing.yml"
+    prefix:   /
+
 app:
     resource: @AppBundle/Controller/
     type:     annotation
