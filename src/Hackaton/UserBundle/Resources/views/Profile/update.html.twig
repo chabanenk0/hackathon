@@ -1,4 +1,21 @@
-<form method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <input type="submit" value="Submit">
-</form>
+{% extends "HackatonUserBundle::layout.html.twig" %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+
+            <form method="post" {{ form_enctype(form) }}>
+                {{ form_label(form.fio) }}<br/>
+                {{ form_widget(form.fio) }}<br/>
+                {{ form_label(form.gender) }} <br/>
+                {{ form_widget(form.gender) }} <br/>
+                {{ form_label(form.file) }}<br/>
+                {{ form_widget(form.file) }}<br/>
+            <input type="submit" value="Сохранить">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
