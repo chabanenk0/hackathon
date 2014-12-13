@@ -55,7 +55,7 @@ class JobApplyController extends Controller
                 )
             );
         } else {
-
+            throw new AccessDeniedException();
         }
 
     }
