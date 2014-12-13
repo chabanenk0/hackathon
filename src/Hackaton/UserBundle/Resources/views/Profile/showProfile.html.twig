@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-9">
+
+            {% for flashMessage in app.session.flashbag.get('user_registered') %}
+                <div class="alert alert-success"><strong>
+                        {{ flashMessage }}
+                    </strong></div>
+            {% endfor %}
+
+            {% block content %}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="well well-sm">
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-4">
+                                        <img src="{{ asset('uploads/photos/' ~ profile.path) }}"
+                                            width="250" height="550"
+                                             class="img-responsive img-rounded">
+                                    </div>
+                                    <div class="col-sm-6 col-md-8">
+                                        <p>
+                                            <i class="glyphicon glyphicon-user"></i>Фио:{{ profile.fio }}<br/>
+                                        </p>
+
+                                        <p><i class="glyphicon glyphicon-envelope"></i>Контактная
+                                            почта: {{ profile.user.email }}</p>
+
+                                        <p><i class="glyphicon glyphicon-glass"></i>Стать: {{ profile.gender }}</p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {% endblock %}
+        </div>
+    </div>
+</div>

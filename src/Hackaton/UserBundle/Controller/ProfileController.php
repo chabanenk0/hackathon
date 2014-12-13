@@ -15,11 +15,11 @@ class ProfileController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function updateAction(Request $request)
+    public function manageAction(Request $request)
     {
         $securityContext = $this->get('security.context');
         $user = $securityContext->getToken()->getUser();
-        $profile = new Profile();
+        $profile = $user->getProfile() ? $user->getProfile() : new Profile();
         $form = $this->createForm(new ProfileType(), $profile);
         $form->handleRequest($request);
         if ($form->isValid()) {
@@ -29,6 +29,21 @@ class ProfileController extends Controller
             $em->flush();
         }
 
-        return $this->render('HackatonUserBundle:Profile:update.html.twig', ['form' => $form->createView()]);
+        return $this->render('HackatonUserBundle:Profile:update.html.twig', array('form' => $form->createView()));
+    }
+
+    /**
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     */
+    public function showAction($id)
+    {
+        $profile = $this->getDoctrine()->getRepository('HackatonUserBundle:Profile')->find($id);
+        if (!$profile instanceof Profile) {
+            throw new NotFoundHttpException('Profile with this identifier not found!');
+        }
+
+        return $this->render('HackatonUserBundle:Profile:showProfile.html.twig', array('profile' => $profile));
     }
 }
