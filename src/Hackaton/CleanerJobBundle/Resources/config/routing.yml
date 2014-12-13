@@ -1,3 +1,13 @@
 hackaton_cleaner_job_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: HackatonCleanerJobBundle:Default:index }
+    path:     /jobs
+    defaults: { _controller: HackatonCleanerJobBundle:Job:index }
+
+hackaton_cleaner_job_new:
+    path:     /jobs/new
+    defaults: { _controller: HackatonCleanerJobBundle:Job:new }
+hackaton_cleaner_job_view:
+    path:     /jobs/{id}/view
+    defaults: { _controller: HackatonCleanerJobBundle:Job:view }
+hackaton_cleaner_job_edit:
+    path:     /jobs/{id}/edit
+    defaults: { _controller: HackatonCleanerJobBundle:Job:edit }

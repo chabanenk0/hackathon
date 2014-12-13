@@ -39,7 +39,7 @@ class Job
     protected $description;
 
     /**
-     * @ORM\OneToOne(targetEntity="Hackaton\UserBundle\Entity\User", cascade="all")
+     * @ORM\ManyToOne(targetEntity="Hackaton\UserBundle\Entity\User", cascade="all")
      */
     protected $creator;
 
@@ -53,6 +53,100 @@ class Job
      */
     protected $chosenBestCandidate;
 
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreator()
+    {
+        return $this->creator;
+    }
+
+    /**
+     * @param mixed $creator
+     */
+    public function setCreator($creator)
+    {
+        $this->creator = $creator;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCandidates()
+    {
+        return $this->candidates;
+    }
+
+    /**
+     * @param mixed $candidates
+     */
+    public function setCandidates($candidates)
+    {
+        $this->candidates = $candidates;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getChosenBestCandidate()
+    {
+        return $this->chosenBestCandidate;
+    }
+
+    /**
+     * @param mixed $chosenBestCandidate
+     */
+    public function setChosenBestCandidate($chosenBestCandidate)
+    {
+        $this->chosenBestCandidate = $chosenBestCandidate;
+    }
 
 }

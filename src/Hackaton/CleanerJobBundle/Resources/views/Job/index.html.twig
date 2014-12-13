@@ -1,0 +1,9 @@
+<h2>На даний момент доступні такі вакансії</h2>
+
+<ul>
+    {% for job in jobs %}
+    <li><a href="{{ path('hackaton_cleaner_job_view', {'id': job.id}) }}"> {{ job.name }}</a></li>
+    {% endfor %}
+</ul>
+
+<a href="{{ path('hackaton_cleaner_job_new') }}">Додати нову вакансію</a>
