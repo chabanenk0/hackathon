@@ -1,0 +1,4 @@
+# Profile
+vputi_user_show_profile:
+    path:     /profile
+    defaults: { _controller: HackatonUserBundle:Profile:update }
