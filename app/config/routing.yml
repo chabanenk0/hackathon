@@ -2,6 +2,10 @@ app:
     resource: @AppBundle/Controller/
     type:     annotation
 
+hackaton_user:
+    resource: "@HackatonUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
 # FOS routes
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

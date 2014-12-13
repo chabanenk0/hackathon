@@ -1,0 +1,8 @@
+# Profile
+user_manage_profile:
+    path:     /profile/manage
+    defaults: { _controller: HackatonUserBundle:Profile:manage }
+
+user_show_profile:
+    path:     /profile/show/{id}
+    defaults: { _controller: HackatonUserBundle:Profile:show , id: 0 }

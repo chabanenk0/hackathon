@@ -21,6 +21,11 @@ class User extends BaseUser
     protected $id;
 
     /**
+     * @ORM\OneToOne(targetEntity="Profile", mappedBy="user", cascade={"persist"})
+     */
+    private  $profile;
+
+    /**
      * Get id
      * @return integer
      */
@@ -32,5 +37,25 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
+    }
+
+    /**
+     * @param Profile $profile
+     * @return $this
+     */
+    public function setProfile(Profile $profile)
+    {
+        $this->profile->setUser($this);
+        $this->profile = $profile;
+
+        return $this;
+    }
+
+    /**
+     * @return Profile
+     */
+    public function getProfile()
+    {
+        return $this->profile;
     }
 }
