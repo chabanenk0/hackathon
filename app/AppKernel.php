@@ -19,6 +19,8 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Hackaton\UserBundle\HackatonUserBundle(),
+            new Hackaton\CleanerJobBundle\HackatonCleanerJobBundle(),
+            new Hackaton\DinningRoomBundle\HackatonDinningRoomBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
