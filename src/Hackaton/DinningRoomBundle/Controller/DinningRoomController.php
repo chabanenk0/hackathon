@@ -17,7 +17,7 @@ class DinningRoomController extends Controller
         $dinners = $this->getDoctrine()->getRepository('HackatonDinningRoomBundle:DinningRoom')->findAll();
         $locations = array();
         foreach ($dinners as $key => $value) {
-            $locations[] = array($value->address, $value->latitude, $value->longitude);
+            $locations[] = array('dsa' . mt_rand(1,15),$value->latitude, $value->longitude);
         }
 
         return $this->render('HackatonDinningRoomBundle:DinningRoom:index.html.twig', array('locs' => $locations, 'dinners' => $dinners));

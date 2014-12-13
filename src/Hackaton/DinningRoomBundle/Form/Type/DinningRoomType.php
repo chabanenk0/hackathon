@@ -15,10 +15,10 @@ class DinningRoomType extends AbstractType
     {
         $builder->add('name', null, ['label' => 'Название'])
         ->add('description', null, ['label' => 'Описание'])
-//        ->add('photo', 'file', ['label' => 'Фото'])
+        ->add('file', 'file', ['label' => 'Фото'])
         ->add('latitude', null, ['label' => 'Широта', 'attr' => ['hidden' => 'hidden']])
         ->add('longitude', null, ['label' => 'Долгота', 'attr' => ['hidden' => 'hidden']])
-        ->add('address', null, ['label' => 'Адресс', 'attr' => ['hidden' => 'hidden']])
+        ->add('address', null, ['label' => 'Адресс', /*'attr' => ['hidden' => 'hidden']*/])
         ->add('url', null, ['label' => 'Ссылка']);
     }
 
