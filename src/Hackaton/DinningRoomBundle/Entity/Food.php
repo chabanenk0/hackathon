@@ -78,26 +78,21 @@ class Food
     protected $unit;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Hackaton\DinningRoomBundle\Entity\Food", mappedBy="dishes")
-     */
-    protected $courses;
-
-    /**
      * @ORM\ManyToMany(targetEntity="Hackaton\DinningRoomBundle\Entity\DinningRoom", inversedBy="foods")
      * @ORM\JoinTable(name="dinners_foods")
      */
     protected $dinners;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Hackaton\UserBundle\Entity\Order", mappedBy="foods")
-     * @ORM\JoinTable(name="order_food")
+     * @ORM\OneToMany(targetEntity="Hackaton\UserBundle\Entity\OrderItem", mappedBy="food")
      */
-    protected $orders;
+    protected $order_items;
 
     public function __construct()
     {
         $this->dinners = new ArrayCollection();
-        $this->orders = new ArrayCollection();
+        $this->order_items = new ArrayCollection();
+        $this->courses = new ArrayCollection();
     }
 
     /**
@@ -107,6 +102,15 @@ class Food
     {
         return $this->id;
     }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
 
     /**
      * @return string
@@ -141,66 +145,7 @@ class Food
     }
 
     /**
-     * @param DinningRoom $room
-     * @return $this
-     */
-    public function addDinner(DinningRoom $room)
-    {
-        $this->dinners->add($room);
-
-        return $this;
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getDinners()
-    {
-        return $this->dinners;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
-
-    /**
-     * @param $price
-     * @return $this
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    public function getAbsolutePath()
-    {
-        return null === $this->image ? null : $this->getUploadDir() . '/' . $this->image;
-    }
-
-    public function getWebPath()
-    {
-        return null === $this->image ? null : $this->getUploadDir() . '/' . $this->image;
-    }
-
-    protected function getUploadRootDir()
-    {
-        return __DIR__ . '/../../../../web/' . $this->getUploadDir();
-    }
-
-    protected function getUploadDir()
-    {
-        return 'uploads/foods';
-    }
-
-    /**
-     * Get file.
-     * @return UploadedFile
+     * @return mixed
      */
     public function getFile()
     {
@@ -208,87 +153,124 @@ class Food
     }
 
     /**
-     * Sets file.
-     * @param UploadedFile $file
+     * @param mixed $file
      */
-    public function setFile(UploadedFile $file = null)
+    public function setFile($file)
     {
         $this->file = $file;
-        if (isset($this->image)) {
-            $this->temp = $this->image;
-            $this->image = null;
-        } else {
-            $this->image = 'initial';
-        }
     }
 
     /**
-     * @ORM\PrePersist()
-     * @ORM\PreUpdate()
+     * @return mixed
      */
-    public function preUpload()
-    {
-        if (null !== $this->getFile()) {
-            $filename = sha1(uniqid(mt_rand(), true));
-            $this->image = $filename . '.' . $this->getFile()->guessExtension();
-        }
-    }
-
-    /**
-     * @ORM\PostPersist()
-     * @ORM\PostUpdate()
-     */
-    public function upload()
-    {
-        if (null === $this->getFile()) {
-            return;
-        }
-        $this->getFile()->move($this->getUploadRootDir(), $this->image);
-        if (isset($this->temp) && $this->temp != 'default_photo.jpg') {
-            unlink($this->getUploadRootDir() . '/' . $this->temp);
-            $this->temp = null;
-        }
-        $this->file = null;
-    }
-
-    /**
-     * @ORM\PostRemove()
-     */
-    public function removeUpload()
-    {
-        if ($file = $this->getAbsolutePath()) {
-            unlink($file);
-        }
-    }
-
-    /**
-     * @param $image
-     * @return $this
-     */
-    public function setPath($image)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPath()
+    public function getImage()
     {
         return $this->image;
     }
 
-    public function getOrders()
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image)
     {
-        return $this->orders;
+        $this->image = $image;
     }
 
-    public function addOrder(Order $order)
+    /**
+     * @return mixed
+     */
+    public function getTemp()
     {
-        $this->orders->add($order);
-
-        return $this;
+        return $this->temp;
     }
+
+    /**
+     * @param mixed $temp
+     */
+    public function setTemp($temp)
+    {
+        $this->temp = $temp;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param float $price
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+    }
+
+    /**
+     * @return int
+     */
+    public function getUnit()
+    {
+        return $this->unit;
+    }
+
+    /**
+     * @param int $unit
+     */
+    public function setUnit($unit)
+    {
+        $this->unit = $unit;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCourses()
+    {
+        return $this->courses;
+    }
+
+    /**
+     * @param mixed $courses
+     */
+    public function setCourses($courses)
+    {
+        $this->courses = $courses;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDinners()
+    {
+        return $this->dinners;
+    }
+
+    /**
+     * @param mixed $dinners
+     */
+    public function setDinners($dinners)
+    {
+        $this->dinners = $dinners;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOrderItems()
+    {
+        return $this->order_items;
+    }
+
+    /**
+     * @param mixed $order_items
+     */
+    public function setOrderItems($order_items)
+    {
+        $this->order_items = $order_items;
+    }
+
+
 }

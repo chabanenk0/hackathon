@@ -20,21 +20,46 @@ class Order
      */
     private $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Profile", inversedBy="orders", cascade={"persist"})
-     * @ORM\JoinColumn(name="profile_id", referencedColumnName="id")
-     */
-    private $profile;
+//    /**
+//     * @ORM\ManyToOne(targetEntity="Hackaton\UserBundle\Entity\Profile", inversedBy="orders", cascade="persist")
+//     * @ORM\JoinColumn(name="profile_id", referencedColumnName="id")
+//     */
+//    private $profile;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Hackaton\DinningRoomBundle\Entity\Food", inversedBy="orders", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Hackaton\DinningRoomBundle\Entity\DinningRoom", inversedBy="orders", cascade={"persist"})
+     * @ORM\JoinColumn(name="dinning_room_id", referencedColumnName="id")
      */
-    private $foods;
+    private $dinningRoom;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="Hackaton\UserBundle\Entity\OrderItem", mappedBy="order", cascade={"persist"})
+     */
+    private $items;
 
     public function __construct()
     {
         $this->foods = new ArrayCollection();
+        $this->items = new ArrayCollection();
     }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
 
     /**
      * @param Profile $profile
@@ -73,4 +98,50 @@ class Order
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDinningRoom()
+    {
+        return $this->dinningRoom;
+    }
+
+    /**
+     * @param mixed $dinningRoom
+     */
+    public function setDinningRoom($dinningRoom)
+    {
+        $this->dinningRoom = $dinningRoom;
+    }
+
+    /**
+     * @param OrderItem $food
+     * @return $this
+     */
+    public function addOrderItem(OrderItem $orderItem)
+    {
+        $this->items->add($orderItem);
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getItems()
+    {
+        return $this->items;
+    }
+
+    /**
+     * @param mixed $items
+     */
+    public function setItems($items)
+    {
+        $this->items = $items;
+    }
+
+
+
 }

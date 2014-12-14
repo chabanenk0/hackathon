@@ -83,3 +83,24 @@ Hackaton\DinningRoomBundle\Entity\Food:
         price: 8.3
         unit: 1
         dinners: [@dinningroom0]
+    food2:
+        name: Компот
+        description: Компот
+        image: 'default_photo.jpg'
+        price: 8.3
+        unit: 1
+        dinners: [@dinningroom0]
+    food3:
+        name: Пюое
+        description: Пюре
+        image: 'default_photo.jpg'
+        price: 8.3
+        unit: 1
+        dinners: [@dinningroom0]
+    food4:
+        name: Салат з овочей
+        description: Салат з овочей
+        image: 'default_photo.jpg'
+        price: 8.3
+        unit: 1
+        dinners: [@dinningroom0]

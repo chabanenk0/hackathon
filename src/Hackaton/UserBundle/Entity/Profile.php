@@ -50,7 +50,7 @@ class Profile
     private $path = 'default_photo.jpg';
 
     /**
-     * @ORM\OneToMany(targetEntity="Order", mappedBy="profile", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Hackaton\UserBundle\Entity\Order", mappedBy="profile", cascade={"persist"})
      */
     private $orders;
 
@@ -252,4 +252,22 @@ class Profile
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getOrders()
+    {
+        return $this->orders;
+    }
+
+    /**
+     * @param mixed $orders
+     */
+    public function setOrders($orders)
+    {
+        $this->orders = $orders;
+    }
+
+
 }

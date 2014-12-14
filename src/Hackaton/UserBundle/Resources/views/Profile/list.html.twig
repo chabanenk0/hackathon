@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h2>Список замовлень:</h2>
+
+<table border="1">
+    {% for order in orders %}
+    <tr>
+        <td>{{ order.id }}</td>
+        <td>{{ order.dinningRoom.name }}</td>
+        <td>
+            <ul>
+                {% for item in order.items %}
+                <li>{{ item.food.name }} ({{ item.food.price }})</li>
+                {% endfor %}
+            </ul>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock body %}

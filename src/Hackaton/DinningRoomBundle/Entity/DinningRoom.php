@@ -17,6 +17,12 @@ class DinningRoom extends Enterprise
      */
     private $foods;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Hackaton\UserBundle\Entity\Order", mappedBy="dinningRoom")
+     */
+    private $orders;
+
+
     public function __construct()
     {
         parent::__construct();

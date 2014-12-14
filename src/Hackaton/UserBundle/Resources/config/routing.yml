@@ -10,3 +10,7 @@ user_show_profile:
 add_food:
     path:     /add/food
     defaults: { _controller: HackatonUserBundle:Order:addFood }
+
+order_list:
+    path:     /orders/list
+    defaults: { _controller: HackatonUserBundle:Order:index }

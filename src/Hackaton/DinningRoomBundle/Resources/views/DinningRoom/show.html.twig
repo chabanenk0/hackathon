@@ -24,18 +24,19 @@
     </script>
 
     <br/>
-
+    <p></p>
     <div id="googleMap" style="width:500px;height:380px;"></div>
-
+    <p></p>
     <br/>
 
     <div id="dinner_room">
         <img src="{{ asset('uploads/diners/' ~ dinner.photo) }}" width="500" height="300">
-        {{ dinner.name }}
-        {{ dinner.description }}
+        <p>{{ dinner.name }}</p>
+        <p></p>{{ dinner.description }}</p>
     </div>
 
     {% if app.user %}
+        <p></p>
         Додайте нову страву:
         <form method="post" {{ form_enctype(form) }}>
             {{ form_widget(form) }}
@@ -46,7 +47,7 @@
     <div id="foods">
         {% for food in dinner.foods %}
             <div id="food">
-                {{ food.name }} <a href="#" class="make_order" data-foodid="{{ food.id }}">Замовити</a>
+                {{ food.name }} <a href="#" class="make_order" data-foodid="{{ food.id }}" data-dinning-id="{{ dinner.id }}">Замовити</a>
                 {{ food.description }}
             </div>
         {% endfor %}
@@ -59,12 +60,16 @@
                 $(val).click(function (e) {
                     e.preventDefault();
                     var food = $(this).attr('data-foodid');
-                    $.ajax({
+                    var dinningRoom = $(this).attr('data-dinning-id');
+                    var x=$.ajax({
                         'url': '{{ path('add_food') }}',
                         'method': 'POST',
-                        'data': JSON.stringify({'food': food}),
+                        'data': JSON.stringify({'food': food, 'dinningRoom': dinningRoom}),
                         'dataType': 'json',
                         'success': function (data) {
+                            console.log(data);
+                        },
+                        'error' : function(data) {
                             console.log(data);
                         }
                     });
