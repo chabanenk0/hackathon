@@ -66,6 +66,9 @@
     </div>
     <!-- /.container -->
 </nav>
+
+
+{% if app.request.attributes.get('_route') == 'welcome_page' %}
 {% block carousel %}
 <!-- Header Carousel -->
 <header id="myCarousel" class="carousel slide">
@@ -107,6 +110,9 @@
     </a>
 </header>
 {% endblock %}
+{% else %}
+
+{% endif %}
 
 {% block body %}
 
