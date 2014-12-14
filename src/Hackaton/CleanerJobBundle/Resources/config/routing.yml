@@ -11,6 +11,16 @@ hackaton_cleaner_job_view:
 hackaton_cleaner_job_edit:
     path:     /jobs/{id}/edit
     defaults: { _controller: HackatonCleanerJobBundle:Job:edit }
+hackaton_cleaner_user_job_view:
+    path:     /userjobs/{id}/view
+    defaults: { _controller: HackatonCleanerJobBundle:Job:userview }
+hackaton_cleaner_user_job_approve:
+    path:     /userjobs/{jobId}/approve
+    defaults: { _controller: HackatonCleanerJobBundle:Job:approveJob }
+
+hackaton_cleaner_employer_job_view:
+    path:     /employerjobs/{id}/view
+    defaults: { _controller: HackatonCleanerJobBundle:Job:employerview }
 
 
 hackaton_cleaner_job_apply:
@@ -22,3 +32,6 @@ hackaton_cleaner_job_apply_view:
 hackaton_cleaner_job_apply_approve:
     path:     /applyjobs/{jobId}/approve
     defaults: { _controller: HackatonCleanerJobBundle:JobApply:approve }
+hackaton_cleaner_job_apply_approve_js:
+    path:     /applyjobs/{jobId}/approvejs/{userId}
+    defaults: { _controller: HackatonCleanerJobBundle:JobApply:approvejs }

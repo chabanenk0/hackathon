@@ -6,7 +6,7 @@
 
 <ul>
     {% for candidate in candidates %}
-    <li>Імя:<a href="{{ path('user_show_profile', {'id':candidate.candidate.id}) }}">{{ candidate.candidate.profile.fio }}</a>Message:<a href="{{ path('hackaton_cleaner_job_view', {'id': candidate.id}) }}"> {{ candidate.message }}</a></li>
+    <li>Імя:<a href="{{ path('user_show_profile', {'id':candidate.candidate.id}) }}">{{ candidate.candidate.profile.fio }}</a>Message:<a href="{{ path('hackaton_cleaner_job_view', {'id': candidate.id}) }}"> {{ candidate.message }}</a> <a href="{{ path('hackaton_cleaner_job_apply_approve_js', {'jobId': jobId, 'userId': candidate.candidate.id}) }}">Вибрати</a> </li>
     {% endfor %}
     <a href="{{ path('hackaton_cleaner_job_apply_approve', {'jobId': jobId}) }}">Вибрати найкращого кандидата</a>
 </ul>
