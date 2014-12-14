@@ -27,7 +27,7 @@ class Order
     private $profile;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Hackaton\DinningRoomBundle\Entity\Food", inversedBy="orders", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Hackaton\DinningRoomBundle\Entity\Food", inversedBy="orders", cascade={"persist"})
      */
     private $foods;
 

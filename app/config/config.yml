@@ -98,3 +98,7 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+hautelook_alice:
+    locale: en_US   # default
+    seed: 1         # default
