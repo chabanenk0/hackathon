@@ -28,9 +28,11 @@
                             <h4><i class="fa fa-fw fa-check"></i> Актуальні вакансії</h4>
                         </div>
                         <div class="panel-body">
-                            <p>{% for job in jobs %}
-                                    {{ job.name }}
-                                {% endfor %}</p>
+                            <p><ul>
+                                {% for job in jobs %}
+                                    <li><a href="{{ path('hackaton_cleaner_job_view', {'id': job.id}) }}"> {{ job.name }}</a></li>
+                                {% endfor %}
+                            </ul></p>
                             <a href="{{ path('hackaton_cleaner_job_homepage') }}" class="btn btn-default">Детальніше</a>
                         </div>
                     </div>
