@@ -23,6 +23,8 @@ class AppKernel extends Kernel
             new Hackaton\CleanerJobBundle\HackatonCleanerJobBundle(),
             new Hackaton\DinningRoomBundle\HackatonDinningRoomBundle(),
             new Hackaton\MainBundle\HackatonMainBundle(),
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new Hautelook\AliceBundle\HautelookAliceBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

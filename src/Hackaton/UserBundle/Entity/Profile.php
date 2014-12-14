@@ -50,6 +50,12 @@ class Profile
     private $path = 'default_photo.jpg';
 
     /**
+     * @ORM\OneToMany(targetEntity="Order", mappedBy="profile", cascade={"persist"})
+     */
+    private $orders;
+
+
+    /**
      * @var $temp
      */
     private $temp;

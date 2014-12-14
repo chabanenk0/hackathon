@@ -1,0 +1,85 @@
+Hackaton\UserBundle\Entity\User:
+    user0:
+        username: bob
+        email: 'bob@example.org'
+        plainpassword: 123
+        enabled: true
+    user1:
+        username: alice
+        email: 'alice@example.org'
+        plainpassword: 123
+        enabled: true
+Hackaton\UserBundle\Entity\Profile:
+    profile0:
+        fio: bob
+        gender: M
+        path: 'default_photo.jpg'
+        user: @user0
+    profile1:
+        fio: alice
+        gender: F
+        path: 'default_photo.jpg'
+        user: @user1
+
+Hackaton\CleanerJobBundle\Entity\Job:
+    job0:
+        name: Прибиральник в школу № 1
+        description: Необхідно прибиральник у нашу школу. Вимоги: вища освіта, степінь кандидата або доктора наук буде великим плюсом. Також не зайвим буде знання сучасних фреймворків та патернів прибирання.
+        creator: @user0
+    job1:
+        name: Прибиральник в заводську їдальню
+        description: Необхідно прибиральник. Вимоги: відповідальність, відсутність шкідливих звичок, досвід роботи за даним фахом.
+        creator: @user0
+    job2:
+        name: Прибиральник у нічний клуб
+        description: Необхідно прибиральник. Вимоги: виносливість, можливість протистояти темним силам, знання самбо.
+        creator: @user1
+    job3:
+        name: Прибиральник у жек № 23
+        description: Необхідно прибиральник. Вимоги: поблажливі. 3 години в день спиш, а потім вкалуєш як віл.
+        creator: @user1
+    job4:
+        name: Прибиральник
+        description: Треба прибиральник. Дуже терміново.
+        creator: @user1
+    job5:
+        name: Прибиральник
+        description: Треба прибиральник. Дуже терміново.
+        creator: @user1
+Hackaton\CleanerJobBundle\Entity\Candidate:
+    candidate0:
+        candidate: @user0
+        job: @job0
+        message: Вітаю! Я професійний прибиральник з 8-річним стажем роботи в Google та 6-річним у Microsoft і хотів би працювати у вашій компанії. З повагою, Боб.
+Hackaton\DinningRoomBundle\Entity\DinningRoom:
+    dinningroom0:
+        name: Їдальня № 1
+        description: Це найкраща і найдешевша їдальня у нашому місті. Ми знаємося на  своїй справі, приходьте до нас - не пожалкуєте.
+        photo: 'stolova0001.jpg'
+        latitude: 49.4213425
+        longitude: 32.0979169
+        address: бул. Шевченка, 480
+        url: http://zhratva.com.ua
+    dinningroom1:
+        name: Їдальня № 2
+        description: Це найкраща і найдешевша їдальня у нашому місті. Ми знаємося на  своїй справі, приходьте до нас - не пожалкуєте.
+        photo: 'stolova0002.jpg'
+        latitude: 49.453547
+        longitude: 32.0473841
+        address: бул. Шевченка, 81
+        url: http://zhratva.com.ua
+Hackaton\DinningRoomBundle\Entity\Food:
+    food0:
+        name: Борщ
+        description: Справжній український борщ
+        image: 'default_photo.jpg'
+        price: 12.5
+        unit: 1
+        dinners: [@dinningroom0]
+    food1:
+        name: Вареники
+        description: Вареники
+        image: 'default_photo.jpg'
+        price: 8.3
+        unit: 1
+        dinners: [@dinningroom0]

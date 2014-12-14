@@ -90,7 +90,7 @@ class Food
 
     /**
      * @ORM\ManyToMany(targetEntity="Hackaton\UserBundle\Entity\Order", mappedBy="foods")
-     * @ORM\JoinTable(name="orders_foods")
+     * @ORM\JoinTable(name="order_food")
      */
     protected $orders;
 
