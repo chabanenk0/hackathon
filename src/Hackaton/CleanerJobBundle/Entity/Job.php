@@ -49,7 +49,7 @@ class Job
     protected $candidates;
 
     /**
-     * @ORM\OneToOne(targetEntity="Hackaton\UserBundle\Entity\User", cascade="all")
+     * @ORM\ManyToOne(targetEntity="Hackaton\UserBundle\Entity\User", cascade="all")
      */
     protected $chosenBestCandidate;
 

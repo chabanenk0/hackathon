@@ -55,7 +55,8 @@ class Profile
 
 
     /**
-     * @ORM\OneToOne(targetEntity="Hackaton\CleanerJobBundle\Entity\Job", inversedBy="chosenBestCandidate", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Hackaton\CleanerJobBundle\Entity\Job", cascade={"persist"})
+     * @ORM\JoinColumn(name="job_id", пreferencedColumnName="id")
      */
     private $job;
 
