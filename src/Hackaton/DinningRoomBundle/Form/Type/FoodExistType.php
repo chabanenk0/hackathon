@@ -13,7 +13,15 @@ class FoodExistType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', null, ['label' => 'Название']);
+        $builder->add('foods', 'entity', array(
+                'label' => 'Существующая еда',
+                'class' => 'HackatonDinningRoomBundle:Food',
+                'property' => 'name',
+                'empty_value' => 'Choose a food',
+                'multiple' => true,
+                'expanded' => false,
+            )
+        );
     }
 
     /**
@@ -22,7 +30,7 @@ class FoodExistType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Hackaton\DinningRoomBundle\Entity\Food',
+            'data_class' => null,
             'cascade_validation' => true,
         ]);
     }

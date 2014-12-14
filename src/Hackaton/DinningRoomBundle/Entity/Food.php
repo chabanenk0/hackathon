@@ -87,6 +87,8 @@ class Food
      */
     protected $dinners;
 
+    protected $foods;
+
     public function __construct()
     {
         $this->dinners = new ArrayCollection();
@@ -271,4 +273,11 @@ class Food
     {
         return $this->image;
     }
+
+    public function getFoods()
+    {
+        return $this->foods;
+    }
+
+
 }
