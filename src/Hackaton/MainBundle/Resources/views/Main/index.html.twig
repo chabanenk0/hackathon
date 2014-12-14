@@ -17,7 +17,7 @@
             {% block page_header %}
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        Welcome to Modern Business
+                        DinnerHub
                     </h1>
                 </div>
             {% endblock %}
@@ -42,13 +42,11 @@
                 <div class="col-md-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h4><i class="fa fa-fw fa-gift"></i> Free &amp; Open Source</h4>
+                            <h4><i class="fa fa-fw fa-gift"></i> Заощадимо ваш час</h4>
                         </div>
                         <div class="panel-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae
-                                nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda
-                                voluptatibus eveniet incidunt dicta nostrum quod?</p>
-                            <a href="#" class="btn btn-default">Learn More</a>
+                            <p>Вам не доведеться стояти у черзі - люди, що скористались нашим сервісом обслуговуються у їдальнях позачергово за рахуной попередньо замовленної їжі. Для цього потрібно обрати їдальню, та страву за вашим смаком.</p>
+                            <a href="{{ path('hackaton_dinners') }}" class="btn btn-default">Замовити</a>
                         </div>
                     </div>
                 </div>
@@ -57,13 +55,11 @@
                 <div class="col-md-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h4><i class="fa fa-fw fa-compass"></i> Easy to Use</h4>
+                            <h4><i class="fa fa-fw fa-compass"></i> Допоможемо знайти їдальню</h4>
                         </div>
                         <div class="panel-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae
-                                nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda
-                                voluptatibus eveniet incidunt dicta nostrum quod?</p>
-                            <a href="#" class="btn btn-default">Learn More</a>
+                            <p>За допомогою нашого сервісу ви зможете з легкістю знайти місце для обіду, для цього достатно натиснути на посилання нижче, та скористатися зручною картою :)</p>
+                            <a href="{{ path('hackaton_dinners') }}" class="btn btn-default">Знайти їдальню</a>
                         </div>
                     </div>
                 </div>
@@ -94,7 +90,10 @@
                             <li>Font Awesome v4.1.0</li>
                             <li>Google maps</li>
                         </ul>
-                        <p>У якості завдання отримали проблеми: <strong>Суспхарч та прибиральників</strong>.</p>
+                        <p>У якості завдання отримали проблеми: <strong>громадського харчування та прибиральників</strong>.</p>
+                        <br/>
+                        <p>Проект вміє:</p>
+
                     </div>
                 {% endblock %}
                 {% block bot_ad %}
