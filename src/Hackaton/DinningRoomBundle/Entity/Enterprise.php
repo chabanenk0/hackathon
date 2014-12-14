@@ -76,21 +76,21 @@ class Enterprise
      *
      * @ORM\Column(name="latitude", type="float")
      */
-    public $latitude;
+    protected $latitude;
 
     /**
      * @var double
      *
      * @ORM\Column(name="longitude", type="float")
      */
-    public  $longitude;
+    protected  $longitude;
 
     /**
      * @var string
      *
      * @ORM\Column(name="address", type="string", length=50, nullable=true)
      */
-    public $address;
+    protected $address;
 
     /**
      * @var string

@@ -1,14 +1,19 @@
 {% extends 'HackatonDinningRoomBundle::layout.html.twig' %}
 
 {% block content %}
-    <div id="googleMap" style="width:500px;height:380px;"></div>
+    <style>
+        #googleMap {
+            margin: 30px auto;
+        }
+    </style>
+    <div id="googleMap" style="width:900px;height:380px;"></div>
 
     <script type="text/javascript">
         function initializeMaps() {
             var markers = {{ locs|json_encode|raw }};
-            var latlng = new google.maps.LatLng(-33.92, 151.25);
+            var latlng = new google.maps.LatLng(50.401515322782, 30.5859375);
             var myOptions = {
-                zoom: 10,
+                zoom: 4,
                 center: latlng,
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 mapTypeControl: false
@@ -32,12 +37,15 @@
     </script>
 
     <div id="dinners">
-        {% for dinner in dinners %}
+        {% for dinner in pagination %}
             <div id="dinner">
                 <a href="{{ path('hackaton_dinning_room_show', {'id': dinner.id}) }}">{{ dinner.name }}</a>
                 {{ dinner.description }}
             </div>
         {% endfor %}
+        <div class="navigation">
+            {{ knp_pagination_render(pagination) }}
+        </div>
         <a href="{{ path('hackaton_dinning_room_create') }}">Додати нову їдальню</a>
     </div>
 

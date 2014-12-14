@@ -10,17 +10,25 @@ use Symfony\Component\HttpFoundation\Request;
 class DinningRoomController extends Controller
 {
     /**
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $dinners = $this->getDoctrine()->getRepository('HackatonDinningRoomBundle:DinningRoom')->findAll();
+        $dinners = $this->getDoctrine()->getRepository('HackatonDinningRoomBundle:DinningRoom')->findBy([],['id'=>'DESC']);
         $locations = array();
         foreach ($dinners as $key => $value) {
-            $locations[] = array('dsa' . mt_rand(1,15),$value->latitude, $value->longitude);
+            $locations[] = array('dsa' . mt_rand(1,15),$value->getLatitude(), $value->getLongitude());
         }
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $dinners,
+            $request->query->get('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
 
-        return $this->render('HackatonDinningRoomBundle:DinningRoom:index.html.twig', array('locs' => $locations, 'dinners' => $dinners));
+
+        return $this->render('HackatonDinningRoomBundle:DinningRoom:index.html.twig', array('locs' => $locations, 'pagination' => $pagination));
     }
 
     /**

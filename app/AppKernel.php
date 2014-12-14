@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Hackaton\UserBundle\HackatonUserBundle(),
             new Hackaton\CleanerJobBundle\HackatonCleanerJobBundle(),
             new Hackaton\DinningRoomBundle\HackatonDinningRoomBundle(),
