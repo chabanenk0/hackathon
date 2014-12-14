@@ -30,6 +30,13 @@
 
                                         <p><i class="glyphicon glyphicon-glass"></i>Стать: {{ profile.gender }}</p>
 
+                                        {% if profile.job %}
+                                            <p>Де працюю: <a href="{{ path('hackaton_cleaner_job_view', {'id': profile.job.id}) }}">{{ profile.job.name }}</a></p>
+                                        {% else %}
+                                            <p>Де працюю: Шукаю роботу</p>
+                                        {% endif %}
+
+
                                         {% if app.user.id is same as (profile.id) %}
                                         <p><a href="{{ path('user_manage_profile') }}" class="button">Редагувати</a></p>
                                         {% endif %}

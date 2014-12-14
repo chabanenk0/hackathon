@@ -13,10 +13,17 @@ class JobApproveType  extends AbstractType{
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $job = $options['data'];
         if (!array_key_exists('label', $options)) {
             $options['label'] = 'Save';
         }
-        $builder->add('chosenBestCandidate', 'text', ['label' => 'Виберіть кандидата'])
+        $builder->add('chosenBestCandidate', 'entity',
+            [
+                'label' => 'Виберіть кандидата',
+                'class' => 'HackatonCleanerJobBundle:Candidate',
+                'choices' => $job->getCandidates(),
+            ]
+        )
             ->add('save', 'submit', ['label' => $options['label']]);
     }
 

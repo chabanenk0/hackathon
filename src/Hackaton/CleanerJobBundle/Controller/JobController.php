@@ -104,4 +104,42 @@ class JobController extends Controller
         return true;
     }
 
+    public function employerviewAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->get('security.context')->getToken()->getUser();
+        $jobs = $em->getRepository('Hackaton\CleanerJobBundle\Entity\Job')->findBy(array('creator' => $user));
+
+        return $this->render('HackatonCleanerJobBundle:Job:myjobs.html.twig', array('jobs' => $jobs));
+
+    }
+
+    public function userviewAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->get('security.context')->getToken()->getUser();
+        $jobs = $em->getRepository('Hackaton\CleanerJobBundle\Entity\Job')->findBy(array('chosenBestCandidate' => $user));
+
+        return $this->render('HackatonCleanerJobBundle:Job:myvacancies.html.twig', array('jobs' => $jobs));
+
+    }
+
+
+    public function approveJobAction(Request $request, $jobId)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $job = $em->find('Hackaton\CleanerJobBundle\Entity\Job', $jobId);
+        $user = $this->get('security.context')->getToken()->getUser();
+        if (!$job || !$user) {
+            throw new AccessDeniedException();
+        }
+
+        $user->getProfile()->setJob($job);
+        $em->persist($user);
+        $em->flush();
+        return $this->redirect($this->generateUrl('hackaton_cleaner_user_job_view', array('id' =>$user->getId())));;
+    }
+
+
+
 }
