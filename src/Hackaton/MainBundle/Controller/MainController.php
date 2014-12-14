@@ -8,6 +8,8 @@ class MainController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('HackatonMainBundle:Main:index.html.twig');
+        $jobs = $this->getDoctrine()->getRepository('HackatonCleanerJobBundle:Job')->findAll();
+
+        return $this->render('HackatonMainBundle:Main:index.html.twig', array('jobs' => $jobs));
     }
 }

@@ -278,6 +278,4 @@ class Food
     {
         return $this->foods;
     }
-
-
 }

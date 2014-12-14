@@ -11,7 +11,9 @@
 
     <!-- Page Content -->
     <div class="container">
-
+{% for job in jobs %}
+    {{ job.name }}
+{% endfor %}
         <!-- Marketing Icons Section -->
         <div class="row">
             {% block page_header %}

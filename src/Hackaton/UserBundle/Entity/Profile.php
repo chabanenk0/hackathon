@@ -3,6 +3,7 @@
 namespace Hackaton\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Hackaton\CleanerJobBundle\Entity\Job;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -56,7 +57,7 @@ class Profile
 
     /**
      * @ORM\OneToOne(targetEntity="Hackaton\CleanerJobBundle\Entity\Job", cascade={"persist"})
-     * @ORM\JoinColumn(name="job_id", пreferencedColumnName="id")
+     * @ORM\JoinColumn(name="job_id", referencedColumnName="id")
      */
     private $job;
 
@@ -236,12 +237,13 @@ class Profile
     }
 
     /**
-     * @param mixed $job
+     * @param Job $job
+     * @return $this
      */
-    public function setJob($job)
+    public function setJob(Job $job)
     {
         $this->job = $job;
+
+        return $this;
     }
-
-
 }
