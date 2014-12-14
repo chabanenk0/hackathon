@@ -8,21 +8,29 @@
             </strong></div>
     {% endfor %}
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-6">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
 
-            <form method="post" {{ form_enctype(form) }}>
-                {{ form_label(form.fio) }}<br/>
-                {{ form_widget(form.fio) }}<br/>
-                {{ form_label(form.gender) }} <br/>
-                {{ form_widget(form.gender) }} <br/>
-                {{ form_label(form.file) }}<br/>
-                {{ form_widget(form.file) }}<br/>
-                {{ form_widget(form._token) }}<br/>
-            <input type="submit" value="Сохранить">
-            </form>
+                <form method="post" {{ form_enctype(form) }}>
+
+                    {{ form_errors(form) }}
+
+                    {{ form_label(form.fio) }}<br/>
+                    {{ form_widget(form.fio) }}<br/>
+
+                    {{ form_label(form.gender) }} <br/>
+                    {{ form_widget(form.gender) }} <br/>
+
+                    {{ form_label(form.file) }}<br/>
+                    {{ form_widget(form.file) }}<br/>
+
+                    {{ form_widget(form._token) }}<br/>
+
+                    <input type="submit" value="Сохранить">
+
+                </form>
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}

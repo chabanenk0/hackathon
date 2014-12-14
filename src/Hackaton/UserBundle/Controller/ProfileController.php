@@ -26,6 +26,8 @@ class ProfileController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($profile);
             $em->flush();
+
+            return $this->redirect($this->generateUrl('user_show_profile', array('id' => $profile->getId())));
         }
 
         return $this->render('HackatonUserBundle:Profile:update.html.twig', array('form' => $form->createView()));
