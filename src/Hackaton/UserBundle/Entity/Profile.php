@@ -53,6 +53,12 @@ class Profile
      */
     private $temp;
 
+
+    /**
+     * @ORM\OneToOne(targetEntity="Hackaton\CleanerJobBundle\Entity\Job", inversedBy="chosenBestCandidate", cascade={"persist"})
+     */
+    private $job;
+
     /**
      * Get id
      * @return integer
@@ -219,4 +225,22 @@ class Profile
     {
         return $this->path;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getJob()
+    {
+        return $this->job;
+    }
+
+    /**
+     * @param mixed $job
+     */
+    public function setJob($job)
+    {
+        $this->job = $job;
+    }
+
+
 }

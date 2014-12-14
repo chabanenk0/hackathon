@@ -106,4 +106,9 @@ class Candidate
     {
         $this->message = $message;
     }
+
+    public function __toString()
+    {
+        return $this->candidate->getProfile()->getFio();
+    }
 }

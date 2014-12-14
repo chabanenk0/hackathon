@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h2>Я шукаю прибиральників:</h2>
+
+<ul>
+    {% for job in jobs %}
+    <li><a href="{{ path('hackaton_cleaner_job_view', {'id': job.id}) }}"> {{ job.name }}</a></li>
+    {% endfor %}
+</ul>
+
+<a href="{{ path('hackaton_cleaner_job_new') }}">Додати нову вакансію</a>
+{% endblock body %}

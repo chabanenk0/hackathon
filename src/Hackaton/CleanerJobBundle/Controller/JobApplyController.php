@@ -7,6 +7,7 @@ use Hackaton\CleanerJobBundle\Entity\Job;
 use Hackaton\CleanerJobBundle\Form\Type\CandidateType;
 use Hackaton\CleanerJobBundle\Form\Type\JobApproveType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -76,6 +77,7 @@ class JobApplyController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $job->setChosenBestCandidate($job->getChosenBestCandidate()->getCandidate());
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
@@ -85,6 +87,24 @@ class JobApplyController extends Controller
         return $this->render('HackatonCleanerJobBundle:JobApply:choose.html.twig', array(
             'form' => $form->createView(),
         ));
+    }
+
+    public function approvejsAction(Request $request, $jobId, $userId)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $job = $em->find('Hackaton\CleanerJobBundle\Entity\Job', $jobId);
+        if (!$this->isGrantedToApprove($job)) {
+            throw new AccessDeniedException();
+        }
+        $user = $em->find('Hackaton\UserBundle\Entity\User', $userId);
+
+        if ($user) {
+            $job->setChosenBestCandidate($user);
+        } else {
+            throw new AccessDeniedException();
+        }
+        $em->flush();
+        return $this->redirect($this->generateUrl('hackaton_cleaner_job_apply_view', array('jobId' =>$jobId)));;
     }
 
     private function isGrantedToApprove($job)
