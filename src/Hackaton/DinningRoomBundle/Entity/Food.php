@@ -2,14 +2,16 @@
 
 namespace Hackaton\DinningRoomBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Food
  *
  * @ORM\Table(name="foods")
- * @ORM\Entity(repositoryClass="Acme\DemoBundle\Entity\EnterpriseRepository")
+ * @ORM\Entity(repositoryClass="Hackaton\DinningBundle\Entity\FoodRepository")
  */
 class Food
 {
@@ -46,11 +48,19 @@ class Food
     protected $description;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="image", type="string", length=50, nullable=true)
+     * @Assert\File(maxSize="6000000")
      */
-    protected $image;
+    private $file;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
+    /**
+     * @var $temp
+     */
+    private $temp;
 
     /**
      * @var double
@@ -62,7 +72,7 @@ class Food
     /**
      * @var integer
      *
-     * @ORM\Column(name="unit", type="integer")
+     * @ORM\Column(name="unit", type="integer", nullable=true)
      */
     protected $unit;
 
@@ -71,6 +81,16 @@ class Food
      */
     protected $courses;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Hackaton\DinningRoomBundle\Entity\DinningRoom", inversedBy="foods")
+     * @ORM\JoinTable(name="dinners_foods")
+     */
+    protected $dinners;
+
+    public function __construct()
+    {
+        $this->dinners = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -113,20 +133,142 @@ class Food
     }
 
     /**
-     * @return string
+     * @param DinningRoom $room
+     * @return $this
      */
-    public function getImage()
+    public function addDinner(DinningRoom $room)
     {
-        return $this->image;
+        $this->dinners->add($room);
+
+        return $this;
     }
 
     /**
-     * @param string $image
+     * @return ArrayCollection
      */
-    public function setImage($image)
+    public function getDinners()
     {
-        $this->image = $image;
+        return $this->dinners;
     }
 
+    /**
+     * @return string
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
 
+    /**
+     * @param $price
+     * @return $this
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    public function getAbsolutePath()
+    {
+        return null === $this->image ? null : $this->getUploadDir() . '/' . $this->image;
+    }
+
+    public function getWebPath()
+    {
+        return null === $this->image ? null : $this->getUploadDir() . '/' . $this->image;
+    }
+
+    protected function getUploadRootDir()
+    {
+        return __DIR__ . '/../../../../web/' . $this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        return 'uploads/foods';
+    }
+
+    /**
+     * Get file.
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * Sets file.
+     * @param UploadedFile $file
+     */
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
+        if (isset($this->image)) {
+            $this->temp = $this->image;
+            $this->image = null;
+        } else {
+            $this->image = 'initial';
+        }
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpload()
+    {
+        if (null !== $this->getFile()) {
+            $filename = sha1(uniqid(mt_rand(), true));
+            $this->image = $filename . '.' . $this->getFile()->guessExtension();
+        }
+    }
+
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+    public function upload()
+    {
+        if (null === $this->getFile()) {
+            return;
+        }
+        $this->getFile()->move($this->getUploadRootDir(), $this->image);
+        if (isset($this->temp) && $this->temp != 'default_photo.jpg') {
+            unlink($this->getUploadRootDir() . '/' . $this->temp);
+            $this->temp = null;
+        }
+        $this->file = null;
+    }
+
+    /**
+     * @ORM\PostRemove()
+     */
+    public function removeUpload()
+    {
+        if ($file = $this->getAbsolutePath()) {
+            unlink($file);
+        }
+    }
+
+    /**
+     * @param $image
+     * @return $this
+     */
+    public function setPath($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->image;
+    }
 }

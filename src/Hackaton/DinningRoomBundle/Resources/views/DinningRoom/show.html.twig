@@ -2,29 +2,57 @@
 
 {% block content %}
 
-<div id="googleMap" style="width:500px;height:380px;"></div>
-<script type="text/javascript">
-    var l1 = '{{ dinner.latitude }}';
-    var l2 = '{{ dinner.longitude }}';
-    function initialize() {
-        var myLatlng = new google.maps.LatLng(l1, l2);
-        var mapOptions = {
-            zoom: 4,
-            center: myLatlng
-        };
-        var map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
+    <script type="text/javascript">
+        var l1 = '{{ dinner.latitude }}';
+        var l2 = '{{ dinner.longitude }}';
+        function initialize() {
+            var myLatlng = new google.maps.LatLng(l1, l2);
+            var mapOptions = {
+                zoom: 4,
+                center: myLatlng
+            };
+            var map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
 
-        var marker = new google.maps.Marker({
-            position: myLatlng,
-            map: map,
-            title: 'Hello World!'
-        });
-    }
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map,
+                title: 'Hello World!'
+            });
+        }
 
-    google.maps.event.addDomListener(window, 'load', initialize);
-</script>
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
 
-{{ dinner.name }}
-{{ dinner.description }}
+    <br/>
+
+    <div id="googleMap" style="width:500px;height:380px;"></div>
+
+    <br/>
+
+    <div id="dinner_room">
+        <img src="{{ asset('uploads/diners/' ~ dinner.photo) }}" width="500" height="300">
+        {{ dinner.name }}
+        {{ dinner.description }}
+    </div>
+
+    {% if app.user %}
+        Додайте нову страву:
+        <form method="post" {{ form_enctype(form) }}>
+            {{ form_widget(form) }}
+            <input type="submit" value="Додати страву">
+        </form>
+
+        Виберіть вже існуючу:
+
+    {% endif %}
+
+    <div id="foods">
+        {% for food in dinner.foods %}
+            <div id="food">
+                {{ food.name }}
+                {{ food.description }}
+            </div>
+        {% endfor %}
+    </div>
 
 {% endblock %}

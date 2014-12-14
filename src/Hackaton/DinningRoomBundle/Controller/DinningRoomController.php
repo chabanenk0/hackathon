@@ -3,7 +3,9 @@
 namespace Hackaton\DinningRoomBundle\Controller;
 
 use Hackaton\DinningRoomBundle\Entity\DinningRoom;
+use Hackaton\DinningRoomBundle\Entity\Food;
 use Hackaton\DinningRoomBundle\Form\Type\DinningRoomType;
+use Hackaton\DinningRoomBundle\Form\Type\FoodType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -69,13 +71,23 @@ class DinningRoomController extends Controller
     }
 
     /**
+     * @param Request $request
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showAction($id)
+    public function showAction(Request $request,$id)
     {
         $dinner = $this->getDoctrine()->getRepository('HackatonDinningRoomBundle:DinningRoom')->find($id);
+        $food = new Food();
+        $form = $this->createForm(new FoodType(), $food);
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($food);
+            $food->addDinner($dinner);
+            $em->flush();
+        }
 
-        return $this->render('HackatonDinningRoomBundle:DinningRoom:show.html.twig', array('dinner' =>$dinner));
+        return $this->render('HackatonDinningRoomBundle:DinningRoom:show.html.twig', array('dinner' =>$dinner, 'form' => $form->createView()));
     }
 }

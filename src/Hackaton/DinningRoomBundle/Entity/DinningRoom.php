@@ -2,6 +2,7 @@
 
 namespace Hackaton\DinningRoomBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -11,5 +12,32 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class DinningRoom extends Enterprise
 {
+    /**
+     * @ORM\ManyToMany(targetEntity="Hackaton\DinningRoomBundle\Entity\Food", mappedBy="dinners")
+     */
+    private $foods;
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->foods = new ArrayCollection();
+    }
+
+    /**
+     * @param Food $food
+     * @return $this
+     */
+    public function addFood(Food $food){
+        $this->foods->add($food);
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getFoods()
+    {
+        return $this->foods;
+    }
 }
