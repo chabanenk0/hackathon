@@ -81,12 +81,11 @@ class DinningRoomController extends Controller
         $dinner = $this->getDoctrine()->getRepository('HackatonDinningRoomBundle:DinningRoom')->find($id);
         $food = new Food();
         $form = $this->createForm(new FoodType(), $food);
-        $existingFoodForm = $this->createForm(new FoodExistType(), null);
         $form->handleRequest($request);
         if ($form->isValid()) {
+            $food->addDinner($dinner);
             $em = $this->getDoctrine()->getManager();
             $em->persist($food);
-            $food->addDinner($dinner);
             $em->flush();
         }
 
@@ -94,7 +93,6 @@ class DinningRoomController extends Controller
             array(
                 'dinner' =>$dinner,
                 'form' => $form->createView(),
-                'form2' => $existingFoodForm->createView(),
             ));
     }
 }
