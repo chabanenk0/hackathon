@@ -4,6 +4,7 @@ namespace Hackaton\DinningRoomBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Hackaton\UserBundle\Entity\Order;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -11,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Food
  *
  * @ORM\Table(name="foods")
- * @ORM\Entity(repositoryClass="Hackaton\DinningBundle\Entity\FoodRepository")
+ * @ORM\Entity
  */
 class Food
 {
@@ -87,11 +88,16 @@ class Food
      */
     protected $dinners;
 
-    protected $foods;
+    /**
+     * @ORM\ManyToMany(targetEntity="Hackaton\UserBundle\Entity\Order", mappedBy="foods")
+     * @ORM\JoinTable(name="orders_foods")
+     */
+    protected $orders;
 
     public function __construct()
     {
         $this->dinners = new ArrayCollection();
+        $this->orders = new ArrayCollection();
     }
 
     /**
@@ -274,8 +280,15 @@ class Food
         return $this->image;
     }
 
-    public function getFoods()
+    public function getOrders()
     {
-        return $this->foods;
+        return $this->orders;
+    }
+
+    public function addOrder(Order $order)
+    {
+        $this->orders->add($order);
+
+        return $this;
     }
 }

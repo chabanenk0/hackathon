@@ -46,10 +46,36 @@
     <div id="foods">
         {% for food in dinner.foods %}
             <div id="food">
-                {{ food.name }}
+                {{ food.name }} <a href="#" class="make_order" data-foodid="{{ food.id }}">Замовити</a>
                 {{ food.description }}
             </div>
         {% endfor %}
     </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $.each($(".make_order"), function(k, val){
+                $(val).click(function (e) {
+                    e.preventDefault();
+                    var food = $(this).attr('data-foodid');
+                    $.ajax({
+                        'url': '{{ path('add_food') }}',
+                        'method': 'POST',
+                        'data': JSON.stringify({'food': food}),
+                        'dataType': 'json',
+                        'success': function (data) {
+                            console.log(data);
+                        }
+                    });
+                });
+            });
+
+
+
+        });
+
+
+    </script>
 
 {% endblock %}
